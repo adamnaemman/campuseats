@@ -8,12 +8,19 @@ import Footer from './components/Footer.jsx'
 
 function App() {
   const [selectedVendorId, setSelectedVendorId] = useState(vendors[0].id)
-  const selectedVendor = vendors.find((v) => v.id === selectedVendorId) || vendors[0]
   const [cart, setCart] = useState([])
+  const [searchQuery, setSearchQuery] = useState('')
+
+  const selectedVendor = vendors.find((v) => v.id === selectedVendorId) || vendors[0]
 
   function handleAddToCart(item) {
     setCart((prevCart) => [...prevCart, item]) // a NEW array, never cart.push()
   }
+
+  // Filter menu items by name based on search query
+  const filteredMenu = (selectedVendor.menu || []).filter((item) =>
+    item.name.toLowerCase().includes(searchQuery.toLowerCase())
+  )
 
   // Stretch task (optional): cart total using reduce without extra state
   const cartTotal = cart.reduce((sum, item) => sum + item.price, 0)
@@ -30,7 +37,10 @@ function App() {
                 key={vendor.id}
                 vendor={vendor}
                 isSelected={vendor.id === selectedVendorId}
-                onSelect={setSelectedVendorId}
+                onSelect={(id) => {
+                  setSelectedVendorId(id)
+                  setSearchQuery('')
+                }}
               />
             ))}
           </div>
@@ -38,8 +48,8 @@ function App() {
         <section>
           <h2 className="section-title">Menu: {selectedVendor.name}</h2>
           {/* Personal feature (Digit 0): Search menu by name */}
-          <SearchBar />
-          <MenuList items={selectedVendor.menu} onAdd={handleAddToCart} />
+          <SearchBar value={searchQuery} onChange={setSearchQuery} />
+          <MenuList items={filteredMenu} onAdd={handleAddToCart} />
         </section>
       </main>
       <Footer />
