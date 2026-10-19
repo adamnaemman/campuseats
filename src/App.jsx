@@ -2,8 +2,8 @@ import { useState } from 'react'
 import vendors from './data/vendors.js'
 import Header from './components/Header.jsx'
 import VendorCard from './components/VendorCard.jsx'
+import SearchBar from './components/SearchBar.jsx'
 import MenuList from './components/MenuList.jsx'
-import CategoryFilter from './components/CategoryFilter.jsx'
 import Footer from './components/Footer.jsx'
 
 function App() {
@@ -14,10 +14,6 @@ function App() {
   function handleAddToCart(item) {
     setCart((prevCart) => [...prevCart, item]) // a NEW array, never cart.push()
   }
-
-  // Personal feature (Digit 1: Filter by category)
-  // Build categories list from the active vendor's menu data
-  const categories = ['All', ...new Set((selectedVendor.menu || []).map((item) => item.category))]
 
   // Stretch task (optional): cart total using reduce without extra state
   const cartTotal = cart.reduce((sum, item) => sum + item.price, 0)
@@ -41,7 +37,8 @@ function App() {
         </section>
         <section>
           <h2 className="section-title">Menu: {selectedVendor.name}</h2>
-          <CategoryFilter categories={categories} />
+          {/* Personal feature (Digit 0): Search menu by name */}
+          <SearchBar />
           <MenuList items={selectedVendor.menu} onAdd={handleAddToCart} />
         </section>
       </main>

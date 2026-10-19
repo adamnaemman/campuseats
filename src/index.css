@@ -178,3 +178,24 @@ a.card:hover { border-color: var(--green-light); }
   color: var(--green);
   border-color: var(--green);
 }
+
+/* Week 2 personal feature (Digit 0): SearchBar */
+.search-bar {
+  margin: 0.75rem 0 1.25rem;
+}
+.search-input {
+  width: 100%;
+  padding: 0.65rem 1rem;
+  border: 1px solid #c5cbd3;
+  border-radius: var(--radius);
+  font: inherit;
+  font-size: 0.95rem;
+  background: #ffffff;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.search-input:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(0, 104, 94, 0.15);
+}
