@@ -2,14 +2,14 @@ import { useState } from 'react'
 import vendors from './data/vendors.js'
 import Header from './components/Header.jsx'
 import VendorCard from './components/VendorCard.jsx'
-import SearchBar from './components/SearchBar.jsx'
+import CategoryFilter from './components/CategoryFilter.jsx'
 import MenuList from './components/MenuList.jsx'
 import Footer from './components/Footer.jsx'
 
 function App() {
   const [selectedVendorId, setSelectedVendorId] = useState(vendors[0].id)
   const [cart, setCart] = useState([])
-  const [searchQuery, setSearchQuery] = useState('')
+  const [selectedCategory, setSelectedCategory] = useState('All')
 
   const selectedVendor = vendors.find((v) => v.id === selectedVendorId) || vendors[0]
 
@@ -17,10 +17,14 @@ function App() {
     setCart((prevCart) => [...prevCart, item]) // a NEW array, never cart.push()
   }
 
-  // Filter menu items by name based on search query
-  const filteredMenu = (selectedVendor.menu || []).filter((item) =>
-    item.name.toLowerCase().includes(searchQuery.toLowerCase())
-  )
+  // Personal feature (Digit 1: Filter by category)
+  // Build categories list from active vendor's menu data
+  const categories = ['All', ...new Set((selectedVendor.menu || []).map((item) => item.category))]
+
+  // Filter menu items based on selected category (or show all if 'All' is selected)
+  const displayedMenu = selectedCategory === 'All'
+    ? (selectedVendor.menu || [])
+    : (selectedVendor.menu || []).filter((item) => item.category === selectedCategory)
 
   // Stretch task (optional): cart total using reduce without extra state
   const cartTotal = cart.reduce((sum, item) => sum + item.price, 0)
@@ -39,7 +43,7 @@ function App() {
                 isSelected={vendor.id === selectedVendorId}
                 onSelect={(id) => {
                   setSelectedVendorId(id)
-                  setSearchQuery('')
+                  setSelectedCategory('All')
                 }}
               />
             ))}
@@ -47,9 +51,13 @@ function App() {
         </section>
         <section>
           <h2 className="section-title">Menu: {selectedVendor.name}</h2>
-          {/* Personal feature (Digit 0): Search menu by name */}
-          <SearchBar value={searchQuery} onChange={setSearchQuery} />
-          <MenuList items={filteredMenu} onAdd={handleAddToCart} />
+          {/* Personal feature (Digit 1: Filter by category) */}
+          <CategoryFilter
+            categories={categories}
+            selectedCategory={selectedCategory}
+            onSelectCategory={setSelectedCategory}
+          />
+          <MenuList items={displayedMenu} onAdd={handleAddToCart} />
         </section>
       </main>
       <Footer />
