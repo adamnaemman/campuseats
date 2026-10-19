@@ -1,16 +1,17 @@
 const vendors = [
   {
     id: 'my-restaurant',
-    name: 'Your Restaurant Name',
-    location: 'Mahallah ..., Block ...',
-    openHours: '7:00 am - 10:00 pm',
+    name: 'Riduannoor Enterprise',
+    location: 'Bangunan 12, Block ...',
+    openHours: '7:30 am - 7:00 pm',
     isOpen: true,
     menu: [
-      { id: 'my-1', name: 'Dish 1', description: '...', price: 7.5, category: 'Rice', available: true },
-      { id: 'my-2', name: 'Dish 2', description: '...', price: 6, category: 
-'Noodles', available: true },
-      { id: 'my-3', name: 'Drink 1', description: '...', price: 2.5, category: 
-'Drinks', available: false },
+      { id: 'ktk-1', name: 'Matcha', description: 'Made by Original Matcha', price: 28.00, category: 'Cake', available: true },
+      { id: 'ktk-2', name: 'Bueno', description: 'Rich bueno flavor', price: 28.00, category: 'Cake', available: true },
+      { id: 'ktk-3', name: 'Pistachio', description: 'Classic pistachio taste', price: 35.00, category: 'Cake', available: true },
+      { id: 'ktk-4', name: 'Chocolate', description: 'Made by Original Matcha', price: 28.00, category: 'Cake', available: true },
+      { id: 'ktk-5', name: 'Durian', description: 'Rich durian flavor', price: 28.00, category: 'Cake', available: true },
+      { id: 'ktk-6', name: 'Crunchy', description: 'Classic biscoff taste', price: 28.00, category: 'Cake', available: true },
     ],
   },
   {
@@ -21,8 +22,7 @@ const vendors = [
     isOpen: true,
     menu: [
       { id: 'ami-1', name: 'Nasi Ayam Penyet', description: 'Smashed fried chicken with sambal and rice', price: 9, category: 'Rice', available: true },
-      { id: 'ami-2', name: 'Air Bandung', description: 'Rose syrup with milk', price: 
-3, category: 'Drinks', available: true },
+      { id: 'ami-2', name: 'Air Bandung', description: 'Rose syrup with milk', price: 3, category: 'Drinks', available: true },
     ],
   },
 ]
